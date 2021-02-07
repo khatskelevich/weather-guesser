@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
+})->middleware('guest');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', function () {
+        return view('main');
+    })->name('home');
+
+    Route::get('/settings', function () {
+        return view('dashboard');
+    })->name('settings');
+
+    Route::any('/history', 'Game@getHistory');
+
 });
 
-Route::get('/settings', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('settings');
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
