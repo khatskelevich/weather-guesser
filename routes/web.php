@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->middleware('guest');
+Route::middleware(['guest'])->group(function () {
+
+    Route::get('/welcome', function () {
+        return view('welcome');
+    })->name('welcome');
+
+});
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -23,8 +28,12 @@ Route::middleware(['auth'])->group(function () {
         return view('main');
     })->name('home');
 
+    Route::get('/game', function () {
+        return view('main');
+    })->name('game');
+
     Route::get('/settings', function () {
-        return view('dashboard');
+        return view('main');
     })->name('settings');
 
     Route::any('/history', 'Game@getHistory');

@@ -3,13 +3,20 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+import routes from "./routes/routes";
+import Game from "./components/Game";
+import Settings from "./components/Settings";
+
 export default new VueRouter({
-    routes:[
+    mode: 'history',
+    routes: [
         {
-            path:'/'
+            path: '',
+            component: Game
         },
         {
-            path:'settings'
+            path: '/settings',
+            component: Settings
         },
     ]
 })

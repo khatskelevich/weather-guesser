@@ -3,6 +3,7 @@ require('./bootstrap');
 require('alpinejs');
 
 import Vue from 'vue';
+import router from "./router";
 
 
-const app = new Vue({}).$mount();
+const app = new Vue({router}).$mount('#app');
