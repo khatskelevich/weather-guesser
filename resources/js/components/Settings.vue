@@ -1,11 +1,7 @@
 <template>
   <div class="w-2/3 mx-auto py-4" v-if="this.loaded">
     <h3 class="uppercase">Set your units</h3>
-    <tabs :data="[
-                {id: 'metric', name: 'Celsius'},
-                {id: 'imperial', name: 'Fahrenheit'},
-                {id: 'default', name: 'Kelvin'},
-            ]" :value="unit" @select="saveUnit"></tabs>
+    <tabs :data="unitArray" :value="unit" @select="saveUnit"></tabs>
     <h3 class="text-2xl uppercase">Last 10 games</h3>
     <div class="py-2 align-middle inline-block">
       <div class="shadow border-b border-gray-200">
@@ -52,6 +48,11 @@ export default {
   },
   data() {
     return {
+      unitArray: [
+        {id: 'metric', name: 'Celsius'},
+        {id: 'imperial', name: 'Fahrenheit'},
+        {id: 'default', name: 'Kelvin'},
+      ],
       history: [],
       unit: String,
       loaded: false
@@ -62,9 +63,11 @@ export default {
   },
   methods: {
     getGameStat(str) {
+      const filter = this.$options.filters;
+      debugger;
       let output = '';
       for (let item of JSON.parse(str)) {
-        output += item.city + ', ' + item.country + ',  ' + item.temperature + ' ';
+        output += item.city + ', ' + item.country + ',  ' + filter.temperature(item.temperature, this.unit) + ' ';
       }
       return output;
     },
