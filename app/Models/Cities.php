@@ -4,11 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Cities extends Model
 {
     use HasFactory;
+
+    /**
+     * @return array
+     */
+    public static function index()
+    {
+        $user = User::find(Auth::id());
+        $data['user_unit'] = $user->units;
+        $data['data'] = self::getTemperature();
+
+        return $data;
+    }
 
     /**
      * Return pair of random cities

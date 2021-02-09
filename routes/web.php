@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/history', 'Game@show');
     Route::post('/history', 'Game@store');
 
+    Route::any('api/cities', 'Cities@index');
 });
 
 require __DIR__ . '/auth.php';

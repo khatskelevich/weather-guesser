@@ -10,7 +10,7 @@
                class="h-full p-6 dark:bg-gray-800 bg-white cursor-pointer hover:shadow-xl rounded border-b-4 border-red-500 shadow-md">
             <p class="text-lg">{{ cities[0].city + ', ' + cities[0].country }}</p>
             <p v-if="cShowTemperature" class="text-2xl mb-3 font-semibold inline-flex">
-              {{ formatTemperature(cities[0].temperature) }}
+              {{ cities[0].temperature | temperature(units) }}
             </p>
           </div>
         </div>
@@ -19,7 +19,7 @@
                class="h-full p-6 dark:bg-gray-800 bg-white cursor-pointer hover:shadow-xl rounded border-b-4 border-red-500 shadow-md text-right">
             <p class="text-lg">{{ cities[1].city + ', ' + cities[1].country }}</p>
             <p v-if="cShowTemperature" class="text-2xl mb-3 font-semibold inline-flex ">
-              {{ formatTemperature(cities[1].temperature) }}
+              {{ cities[1].temperature | temperature(units) }}
             </p>
           </div>
         </div>
@@ -39,7 +39,8 @@ export default {
     return {
       cities: [],
       loaded: false,
-      guessed: Boolean
+      guessed: Boolean,
+      units: String
     }
   },
   created() {
@@ -52,20 +53,11 @@ export default {
       this.storeResult();
       this.getNewCities();
     },
-    formatTemperature(temp) {
-      switch (this.units) {
-        case 'metric':
-          return (temp - 273.15).toFixed(2) + ' °C';
-        case 'imperial':
-          return ((temp - 273.15) * 9 / 5 + 32).toFixed(2) + ' °F';
-        default:
-          return temp.toFixed(2) + ' °K';
-      }
-    },
     getNewCities() {
       axios.get('api/cities')
           .then((response) => {
-            this.cities = response.data;
+            this.cities = response.data.data;
+            this.units = response.data.user_unit;
             this.loaded = true;
             this.guessed = null;
           })
@@ -87,7 +79,6 @@ export default {
   computed: {
     ...mapState({
       score: state => state.score,
-      units: state => state.units
     }),
     cShowTemperature() {
       return this.guessed !== null;

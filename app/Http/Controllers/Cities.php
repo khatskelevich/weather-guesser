@@ -9,10 +9,9 @@ class Cities extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return array
      */
     public function index()
     {
-        return \App\Models\Cities::getTemperature();
+        return \App\Models\Cities::index();
     }
 }
