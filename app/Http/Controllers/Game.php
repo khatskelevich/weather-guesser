@@ -15,17 +15,6 @@ use Illuminate\Support\Facades\DB;
  */
 class Game extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,37 +29,10 @@ class Game extends Controller
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Support\Collection
      */
     public function show()
     {
-        return DB::table('games')
-            ->where('user_id', '=', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return GameModel::show();
     }
 
 }

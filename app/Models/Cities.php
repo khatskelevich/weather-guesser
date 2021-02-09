@@ -11,7 +11,7 @@ class Cities extends Model
     use HasFactory;
 
     /**
-     * Returning pair of random cities
+     * Return pair of random cities
      *
      * @return array
      */
@@ -20,6 +20,11 @@ class Cities extends Model
         return DB::select('select t.city_id as id, t.name as city, t.state, t.country from app.cities t order by random() limit 2;');
     }
 
+    /**
+     * Return game data
+     *
+     * @return mixed
+     */
     public static function getTemperature()
     {
         $cities = json_decode(json_encode(self::getCities()), true);

@@ -34,4 +34,15 @@ class GameModel
             return response($e->getMessage(), 500);
         }
     }
+
+    public static function show()
+    {
+        $data['data'] = DB::table('games')
+            ->where('user_id', '=', Auth::id())
+            ->orderBy('created_at', 'desc')->limit(10)
+            ->get();
+       $user = User::find(Auth::id());
+       $data['unit'] = $user->units;
+        return $data;
+    }
 }

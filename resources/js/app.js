@@ -4,6 +4,7 @@ require('alpinejs');
 
 import Vue from 'vue';
 import router from "./router";
+import store from "./store/store";
 
 
-const app = new Vue({router}).$mount('#app');
+const app = new Vue({router, store}).$mount('#app');
