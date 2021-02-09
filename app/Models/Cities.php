@@ -24,7 +24,7 @@ class Cities extends Model
     {
         $cities = json_decode(json_encode(self::getCities()), true);
         foreach ($cities as &$city) {
-            $url = 'http://api.openweathermap.org/data/2.5/weather?id=' . $city['id'] . '&lang=en&appid=' . env('OPENWEATHERMAP_API_KEY');
+            $url = 'http://api.openweathermap.org/data/2.5/weather?id=' . $city['id'] . '&lang=en&appid=3a487065d1678bc87315aabf3780f045';
             $response = file_get_contents($url);
             $data = json_decode($response, true);
             if (!empty($data))

@@ -36,7 +36,8 @@ Route::middleware(['auth'])->group(function () {
         return view('main');
     })->name('settings');
 
-    Route::any('/history', 'Game@getHistory');
+    Route::get('/history', 'Game@show');
+    Route::post('/history', 'Game@store');
 
 });
 

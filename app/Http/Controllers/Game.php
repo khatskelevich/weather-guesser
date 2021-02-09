@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\GameModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,13 +15,6 @@ use Illuminate\Support\Facades\DB;
  */
 class Game extends Controller
 {
-
-    private $user_id;
-
-    public function __construct(Request $request)
-    {
-        $this->user_id = Auth::id();//$request->user;
-    }
 
     /**
      * Display a listing of the resource.
@@ -35,12 +29,12 @@ class Game extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return GameModel::store($request);
     }
 
     /**
@@ -51,16 +45,16 @@ class Game extends Controller
     public function show()
     {
         return DB::table('games')
-                    ->where('user_id', '=', $this->user_id)
-                    ->orderBy('created_at', 'desc')
-                    ->get();
+            ->where('user_id', '=', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -71,7 +65,7 @@ class Game extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -79,11 +73,4 @@ class Game extends Controller
         //
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function getHistory()
-    {
-
-    }
 }
