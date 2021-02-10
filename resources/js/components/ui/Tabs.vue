@@ -39,11 +39,7 @@ export default {
 <style>
 
 .tabs-container {
-  display: flex;
-}
-
-.tabs-container .tabs {
-  margin-left: 20px;
+  height: 100px;
 }
 
 .tabs-container .tabs:first-child {
@@ -55,7 +51,6 @@ export default {
   justify-content: left;
   line-height: 28px;
   height: 30px;
-  margin: 5px;
 }
 
 .tabs__item {
