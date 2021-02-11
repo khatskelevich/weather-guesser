@@ -36,12 +36,12 @@ Route::middleware(['auth'])->group(function () {
         return view('main');
     })->name('settings');
 
-    Route::post('/settings', 'Settings@store');
+    Route::post('/settings', 'SettingsController@store');
 
-    Route::get('/history', 'Game@show');
-    Route::post('/history', 'Game@store');
+    Route::get('/history', 'GameController@show');
+    Route::post('/history', 'GameController@store');
 
-    Route::any('api/cities', 'Cities@index');
+    Route::any('api/cities', 'CitiesController@index');
 });
 
 require __DIR__ . '/auth.php';

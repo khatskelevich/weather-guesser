@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  * Class Game
  * @package App\Http\Controllers
  */
-class Game extends Controller
+class GameController extends Controller
 {
     /**
      * Store a newly created resource in storage.

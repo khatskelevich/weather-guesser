@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Settings extends Controller
+class SettingsController extends Controller
 {
     public function store(Request $request)
     {
@@ -16,7 +16,7 @@ class Settings extends Controller
             $user = User::find(Auth::id());
             $user->units = $request->units;
             $user->save();
-            return response('Settings saved');
+            return response('SettingsController saved');
         }
         catch (\Exception $e)
         {
