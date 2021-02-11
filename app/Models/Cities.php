@@ -16,11 +16,7 @@ class Cities extends Model
      */
     public static function index()
     {
-        $user = User::find(Auth::id());
-        $data['user_unit'] = $user->units;
-        $data['data'] = self::getTemperature();
-
-        return $data;
+        return self::getTemperature();
     }
 
     /**

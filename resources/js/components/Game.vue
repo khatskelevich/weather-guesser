@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 
 export default {
   data() {
@@ -40,7 +40,6 @@ export default {
       cities: [],
       loaded: false,
       guessed: Boolean,
-      units: String
     }
   },
   created() {
@@ -56,8 +55,7 @@ export default {
     getNewCities() {
       axios.get('api/cities')
           .then((response) => {
-            this.cities = response.data.data;
-            this.units = response.data.user_unit;
+            this.cities = response.data;
             this.loaded = true;
             this.guessed = null;
           })
@@ -80,6 +78,7 @@ export default {
     ...mapState({
       score: state => state.score,
     }),
+    ...mapGetters({units: 'getUnits'}),
     cShowTemperature() {
       return this.guessed !== null;
     },
