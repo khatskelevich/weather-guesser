@@ -1,5 +1,5 @@
 <x-app-layout>
-    <router-view></router-view>
+    <app-component></app-component>
 </x-app-layout>
 
 
