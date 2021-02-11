@@ -4,8 +4,12 @@
       <div class="navigation-item navigation-logo">
         <logo></logo>
       </div>
-      <div class="navigation-item navigation-link">Game</div>
-      <div class="navigation-item navigation-link">Profile</div>
+      <div class="navigation-item navigation-link">
+        <router-link :to="'/'">Game</router-link>
+      </div>
+      <div class="navigation-item navigation-link">
+        <router-link :to="'/settings'">Profile</router-link>
+      </div>
     </div>
     <div class="navigation-user">
       <div class="navigation-item" @click="dropdown=!dropdown">{{ username }}
@@ -85,12 +89,11 @@ export default {
 }
 
 .navigation-user {
-  border: 1px solid black;
   margin-right: 50px;
   position: relative;
 }
 
-.navigation-user-menu{
+.navigation-user-menu {
   position: absolute;
   top: 35px;
   right: 10px;
@@ -108,14 +111,13 @@ export default {
 .navigation-user-menu__show {
   display: block;
 }
-.navigation-user-menu__dropdown{
+
+.navigation-user-menu__dropdown {
   padding: 5px 10px;
   transition: background-color 300ms;
 }
 
-.navigation-user-menu__dropdown:hover{
+.navigation-user-menu__dropdown:hover {
   background: rgb(234, 235, 236);
 }
-
-
 </style>

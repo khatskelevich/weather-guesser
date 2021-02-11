@@ -43,6 +43,6 @@ class GameModel
             ->get();
        $user = User::find(Auth::id());
        $data['unit'] = $user->units;
-        return $data;
+       return $data;
     }
 }

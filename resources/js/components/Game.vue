@@ -1,7 +1,7 @@
 <template>
   <div v-if="loaded" class="row">
     <div class="mx-auto py-8 text-center">
-      <h3 class="text-4xl">Where is the hotter?</h3>
+      <h3 class="text-4xl">Where is warmer?</h3>
     </div>
     <div class="max-w-screen-sm mx-auto">
       <div class="sm:grid grid-cols-4 gap-5 mx-auto px-16 g-buttons">
