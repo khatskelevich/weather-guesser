@@ -12,6 +12,9 @@ export default new Vuex.Store({
     getters: {
         getUnits(state){
             return state.units;
+        },
+        getUsername(state){
+            return state.username;
         }
     },
     mutations: {

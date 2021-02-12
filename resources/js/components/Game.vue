@@ -75,9 +75,7 @@ export default {
     },
   },
   computed: {
-    ...mapState({
-      score: state => state.score,
-    }),
+    ...mapState({score: state => state.score}),
     ...mapGetters({units: 'getUnits'}),
     cShowTemperature() {
       return this.guessed !== null;

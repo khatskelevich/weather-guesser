@@ -25,13 +25,13 @@
 <script>
 import Logo from "./ui/Logo";
 import Arrow from "./ui/Arrow";
+import {mapGetters} from "vuex";
 
 export default {
   components: {Logo, Arrow},
   data() {
     return {
       dropdown: false,
-      username: 'dev',
     }
   },
   methods: {
@@ -43,7 +43,9 @@ export default {
       });
     }
   },
-  computed: {}
+  computed: {
+    ...mapGetters({username: 'getUsername'})
+  }
 }
 </script>
 

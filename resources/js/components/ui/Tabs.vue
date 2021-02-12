@@ -3,7 +3,7 @@
   <div v-if="data.length" class="tabs" @click="$emit('click')">
     <a class="tabs__item"
        :class="{tabs__item_active : (tab.id + '') === current}"
-       v-on:click="setTab(tab.id)"
+       @click="setTab(tab.id)"
        v-for="tab in data"
        v-html="tab.name"
     ></a>
@@ -64,11 +64,11 @@ export default {
 }
 
 .tabs__item:first-child {
-  border-radius: 5px 0 0 5px;
+  border-radius: 3px 0 0 3px;
 }
 
 .tabs__item:last-child {
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 3px 3px 0;
 }
 
 .tabs__item_active {

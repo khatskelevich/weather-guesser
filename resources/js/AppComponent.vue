@@ -20,10 +20,8 @@ export default {
     getUserData() {
       axios.get('/userdata')
           .then(response => {
-            debugger;
             this.setUnits(response.data.units);
             this.setUsername(response.data.username);
-            debugger;
           })
           .catch(resp => {
             console.log(resp)
