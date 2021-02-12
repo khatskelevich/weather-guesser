@@ -7,7 +7,7 @@
 
     <div class="wrap-table">
       <p class="mx-1">History</p>
-      <div class="table">
+      <div class="table-container">
         <table>
           <tbody class="table-body">
           <tr v-for="(row, index) in history" :class="row.guessed? 'guessed' : 'not-guessed'">
@@ -84,6 +84,10 @@ export default {
 }
 .table-body{
   max-height: 400px;
+}
+
+.table-body__cell {
+  min-width: 120px;
 }
 
 .guessed {
