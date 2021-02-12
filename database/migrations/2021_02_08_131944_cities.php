@@ -15,7 +15,7 @@ class Cities extends Migration
     {
         //
         Schema::create('cities', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigInteger('city_id')->primary();
             $table->text('name');
             $table->text('state');
             $table->text('country');
