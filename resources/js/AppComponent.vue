@@ -1,7 +1,7 @@
 <template>
   <div>
     <layout></layout>
-    <router-view></router-view>
+    <router-view class="app-container"></router-view>
   </div>
 </template>
 
@@ -32,3 +32,6 @@ export default {
   }
 }
 </script>
+<style>
+
+</style>

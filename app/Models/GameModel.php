@@ -35,14 +35,19 @@ class GameModel
         }
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function show()
     {
-        $data['data'] = DB::table('games')
+        $data = DB::table('games')
             ->where('user_id', '=', Auth::id())
             ->orderBy('created_at', 'desc')->limit(10)
             ->get();
-       $user = User::find(Auth::id());
-       $data['unit'] = $user->units;
-       return $data;
+        foreach ($data as &$item) {
+            $item->game_stat = json_decode($item->game_stat, 1);
+        }
+
+        return $data;
     }
 }

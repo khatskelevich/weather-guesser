@@ -1,0 +1,24 @@
+.table {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+}
+
+.table-head {
+    display: block;
+}
+
+.table-head-row__sticky > th {
+    position: sticky;
+    top: 0;
+}
+
+.table-body {
+    display: block;
+    overflow-y: auto;
+}
+
+.table-body__cell {
+    padding: 16px;
+}

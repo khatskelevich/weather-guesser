@@ -1,38 +1,21 @@
 <template>
-  <div class="w-2/3 mx-auto py-4" v-if="this.loaded">
+  <div class="settings" v-if="this.loaded">
     <div class="tabs-container">
-      <h3 class="mx-1">Set your units</h3>
-      <tabs :data="unitArray" :value="unit" @select="saveUnit"></tabs>
+      <p class="mx-1">Set your units</p>
+      <tabs :data="unitArray" :value="units" @select="saveUnit"></tabs>
     </div>
-    <h3 class="text-2xl mx-1">Last 10 games</h3>
-    <div class="py-2 align-middle inline-block">
-      <div class="shadow border-b border-gray-200">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Date
-            </th>
-            <th scope="col" colspan="2"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Result
-            </th>
-          </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(row, index) in history">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="ml-4">
-                  <div class="text-sm font-medium text-gray-900">
-                    {{ toDate(row.created_at) }}
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td colspan="2" class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ getGameStat(row.game_stat) }}</div>
-            </td>
+
+    <div class="wrap-table">
+      <p class="mx-1">History</p>
+      <div class="table">
+        <table>
+          <tbody class="table-body">
+          <tr v-for="(row, index) in history" :class="row.guessed? 'guessed' : 'not-guessed'">
+            <td class="table-body__cell">{{ toDate(row.created_at) }}</td>
+            <td class="table-body__cell">{{ row.game_stat[0].city }}, {{ row.game_stat[0].country }}</td>
+            <td class="table-body__cell">{{ row.game_stat[0].temperature | temperature(units) }}</td>
+            <td class="table-body__cell">{{ row.game_stat[1].temperature | temperature(units) }}</td>
+            <td class="table-body__cell">{{ row.game_stat[1].city }}, {{ row.game_stat[1].country }}</td>
           </tr>
           </tbody>
         </table>
@@ -43,6 +26,7 @@
 
 <script>
 import Tabs from "./ui/Tabs";
+import {mapGetters} from "vuex";
 
 export default {
   components: {
@@ -56,27 +40,17 @@ export default {
         {id: 'default', name: 'Kelvin'},
       ],
       history: [],
-      unit: String,
-      loaded: false
+      loaded: false,
     }
   },
   created() {
     this.getHistory();
   },
   methods: {
-    getGameStat(str) {
-      const filter = this.$options.filters;
-      let output = '';
-      for (let item of JSON.parse(str)) {
-        output += item.city + ', ' + item.country + ',  ' + filter.temperature(item.temperature, this.unit) + ' ';
-      }
-      return output;
-    },
     getHistory() {
       axios.get('history')
           .then((response) => {
-            this.history = response.data.data;
-            this.unit = response.data.unit;
+            this.history = response.data;
             this.loaded = true;
           })
           .catch(function (resp) {
@@ -93,9 +67,30 @@ export default {
           .then()
           .catch(function (resp) {
             console.log(resp);
-            alert("Error. Failed download history.");
+            alert("Error. Failed upload settings.");
           });
     }
   },
+  computed: {
+    ...mapGetters({units: 'getUnits'}),
+  }
 }
 </script>
+<style>
+.settings {
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 66.66667%;
+}
+.table-body{
+  max-height: 400px;
+}
+
+.guessed {
+  background-color: rgba(43, 233, 43, 0.2);
+}
+
+.not-guessed {
+  background-color: rgba(233, 43, 49, 0.2);
+}
+</style>
